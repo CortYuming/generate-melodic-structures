@@ -115,6 +115,7 @@ function generateMelodicStructures() {
     const header = `T: ${title.replace("_", " ")}
 M: 4/4
 Q:1/4=120
+C:Jerry Bergonzi
 K: ${key}
 `
     let chordData = []
