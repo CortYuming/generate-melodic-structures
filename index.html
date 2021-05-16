@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://www.abcjs.net/abcjs-editor.html -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Melodic Structures</title>
+
+    <link href="css/abcjs-audio.css" media="all" rel="stylesheet" type="text/css">
+    <script src="js/abcjs-basic-min.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
+    <style>
+    textarea#abc,
+    .abcjs-inline-audio {
+      width: 100%;
+    }
+    @media print {
+      h1, p, textarea, #selection, #audio, #warnings, hr {
+        display: none;
+      }
+    }
+    p {
+      max-width: 600px;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Generate Melodic Structures</h1>
+    
+    <p><button onclick="location.reload();">Generate!(reload)</button></p>
+    <textarea name="abc" id="abc" cols="80" rows="15">X: 1
+T: Cooley's
+M: 4/4
+L: 1/8
+R: reel
+K: Emin
+|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|
+EBBA B2 EB|B2 AB defg|afe^c dBAF|DEFD E2:|
+|:gf|eB B2 efge|eB B2 gedB|A2 FA DAFA|A2 FA defg|
+eB B2 eBgB|eB B2 defg|afe^c dBAF|DEFD E2:|
+    </textarea>
+
+    <div id="audio"><div class="abcjs-inline-audio">
+      <button type="button" class="abcjs-midi-loop abcjs-btn" title="Click to toggle play once/repeat." aria-label="Click to toggle play once/repeat.">
+      </button>
+      <button type="button" class="abcjs-midi-reset abcjs-btn" title="Click to go to beginning." aria-label="Click to go to beginning.">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+          <g>
+            <polygon points="5 12.5 24 0 24 25"></polygon>
+            <rect width="3" height="25" x="0" y="0"></rect>
+          </g>
+        </svg>
+      </button>
+      <button type="button" class="abcjs-midi-start abcjs-btn" title="Click to play/pause." aria-label="Click to play/pause.">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="abcjs-play-svg">
+          <g>
+            <polygon points="4 0 23 12.5 4 25"></polygon>
+          </g>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="abcjs-pause-svg">
+          <g>
+            <rect width="8.23" height="25"></rect>
+            <rect width="8.23" height="25" x="17"></rect>
+          </g>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="abcjs-loading-svg">
+          <circle cx="50" cy="50" fill="none" stroke-width="20" r="35" stroke-dasharray="160 55"></circle>
+        </svg>
+      </button>
+      <button type="button" class="abcjs-midi-progress-background" title="Click to change the playback position." aria-label="Click to change the playback position."><span class="abcjs-midi-progress-indicator" style="left: 12.8672px;"></span></button>
+      <span class="abcjs-midi-clock">0:00</span>
+      <span class="abcjs-tempo-wrapper"><label><input class="abcjs-midi-tempo" type="number" min="1" max="300" value="100" title="Change the playback speed." aria-label="Change the playback speed.">%</label><span>&nbsp;(<span class="abcjs-midi-current-tempo">120</span> BPM)</span></span>
+      <div class="abcjs-css-warning" style="font-size: 12px;color:red;border: 1px solid red;text-align: center;width: 300px;margin-top: 4px;font-weight: bold;border-radius: 4px;">CSS required: load abcjs-audio.css</div></div>
+    </div>
+    <div id="warnings" style="color: #ccc;">No errors</div>
+    <div id="paper0" class="paper" style="overflow: hidden; height: 493.087px;"></div>
+    <div id="selection"></div>
+  </body>
+</html>
