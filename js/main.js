@@ -95,6 +95,42 @@ function generateMelodicStructures(title, chordProgression) {
     return getChromatic(key)[numberArr.indexOf(number)]
   }
 
+  function checkAltNote(chord) {
+    const altNoteList = ['b9', 'b5']
+    const arr = chord.match(/[b59]+$/)
+    if (!arr) {
+      return []
+    }
+
+    const altnoteArr = []
+    for (const n of altNoteList) {
+      if (arr[0].indexOf(n) !== -1) {
+        altnoteArr.push(n)
+      }
+    }
+    return altnoteArr
+  }
+
+  function convShapeInterval(shape, note) {
+    const intervals = {
+      b9: [3, 2],
+      b5: [8, 7],
+    }
+
+    const interval = intervals[note]
+
+    if (!interval) {
+      return shape
+    }
+    const _shape = shape.slice()
+
+    for (let i = 0; i < _shape.length; i++) {
+      if (_shape[i] === interval[0]) {
+        _shape[i] = interval[1]
+      }
+    }
+    return _shape
+  }
   function getABCString(title, chordProgression) {
     // Accidental is flat only
     const all_keys = [ "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb"]
@@ -147,11 +183,13 @@ K: ${key}
       }
 
       // add shape
-      // TODO: b2, b5
-      // TODO: inversion of shape
       let shape = [1, 3, 5, 8]  // 1, 2, 3, 5
       if (isMinor) {
         shape = [1, 4, 6, 8]  // 1, b3, 4, 5
+      }
+
+      for (const n of checkAltNote(chord)) {
+        shape = convShapeInterval(shape, n)
       }
 
       shape = shuffleArray(shape)
