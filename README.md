@@ -10,3 +10,5 @@
 - https://paulrosen.github.io/abcjs/
 - https://www.abcjs.net/
 - https://www.abcjs.net/abcjs-editor.html
+- https://configurator.abcjs.net/interactive/
+- https://paulrosen.github.io/abcjs/upgrading/midijs.html#creating-the-midi
