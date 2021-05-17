@@ -67,30 +67,23 @@ function generateMelodicStructures(title, chordProgression) {
   function splitChord(chord) {
     let matchArr = []
 
-    matchArr = chord.match(/^[IVbm]+/)
+    matchArr = chord.match(/^[IV_m#]+/)
     const baseChord = matchArr ? matchArr[0] : ""
 
-    matchArr = baseChord.match(/^[IV]+/)
+    matchArr = baseChord.match(/^[_IV]+/)
     const baseNumber = matchArr ? matchArr[0] : ""
 
     let isMinor = false
-    let isFlat = false
 
     if (baseChord) {
-      matchArr = baseChord.match(/b/)
-      isFlat = matchArr ? !!matchArr[0] : false
-
       matchArr = baseChord.match(/m/)
       isMinor = matchArr ? !!matchArr[0] : false
     }
 
-    return [chord, baseNumber, isFlat, isMinor]
+    return [chord, baseNumber, isMinor]
   }
 
-  function getNumberToNote(key, number, isFlat) {
-    if (isFlat) {
-      number = `_${number}`
-    }
+  function getNumberToNote(key, number) {
     const numberArr = ["I", "_II", "II", "_III", "III","IV", "_V", "V", "_VI", "VI", "_VII", "VII"]
     return getChromatic(key)[numberArr.indexOf(number)]
   }
@@ -133,10 +126,13 @@ function generateMelodicStructures(title, chordProgression) {
   }
   function getABCString(title, chordProgression) {
     // Accidental is flat only
-    const all_keys = [ "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb"]
-    const key = shuffleArray(all_keys)[0]
+    const all_keys = [ "C", "_D", "D", "_E", "E", "F", "_G", "G", "_A", "A", "_B"]
+    let key = shuffleArray(all_keys)[0]
+    if (key.startsWith("_")) {
+      key = key.replace("_", "") + "b"
+    }
     // const key = "Db"  // debug
-    const header = `T: ${title.replace("_", " ")}
+    const header = `T: ${title}
 M: 4/4
 Q:1/4=120
 C:Jerry Bergonzi
@@ -160,14 +156,14 @@ K: ${key}
     let barArr = ['|:']
     let beatCount = 0
     _beforeChord = ''
-    for (const [chord, baseNumber, isFlat, isMinor] of chordData) {
+    for (const [chord, baseNumber, isMinor] of chordData) {
       beatCount += 1
 
       let _key = key
       if (_key.indexOf("b") !== -1) {
         _key = "_" + _key.replace("b", "")
       }
-      const note = getNumberToNote(_key, baseNumber, isFlat)
+      const note = getNumberToNote(_key, baseNumber)
 
       // add display chord
       if (beatCount % 2 === 1 || (beatCount % 2 === 0 && _beforeChord !== chord)) {
@@ -239,10 +235,10 @@ function main() {
     lady_duck:{
       title: "Lady Duck",
       progression: [
-        'I∆7', ':', 'I∆7', ':', 'IVm7', ':', 'VIIb7', ':',
-        'I∆7', ':', 'I∆7', ':', 'VIIbm7', ':', 'IIIb7', ':',
-        'VIb∆7', ':', 'VIb∆7', ':', 'VIm7', ':', 'II7', ':',
-        'IIm7', ':', 'V7', ':', 'I∆7', 'IIIb∆7', 'VIb∆7', 'IIb∆7',
+        'I∆7', ':', 'I∆7', ':', 'IVm7', ':', '_VII7', ':',
+        'I∆7', ':', 'I∆7', ':', '_VIIm7', ':', '_III7', ':',
+        '_VI∆7', ':', '_VI∆7', ':', 'VIm7', ':', 'II7', ':',
+        'IIm7', ':', 'V7', ':', 'I∆7', '_III∆7', '_VI∆7', 'IIb∆7',
       ]
     },
     example4:{
