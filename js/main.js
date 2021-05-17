@@ -34,7 +34,7 @@ function initEditor() {
     });
 }
 
-function generateMelodicStructures(title, chordProgression) {
+function generateMelodicStructures(data) {
   function getAllNotes(key) {
     const sharpNoteKeys = ["G", "D", "A", "E", "B", "^F"]
     const all_notes = [ "C", "_D", "D", "_E", "E", "F", "_G", "G", "_A", "A", "_B", "B", "c", "_d", "d", "_e", "e", "f", "_g", "g", "_a", "a", "_b", "b", "c'", "_d'", "d'", "_e'", "e'", "f'", "_g'", "g'", "_a'", "a'", "_b'", "b'"]
@@ -124,7 +124,7 @@ function generateMelodicStructures(title, chordProgression) {
     }
     return _shape
   }
-  function getABCString(title, chordProgression) {
+  function getABCString(data) {
     // Accidental is flat only
     const all_keys = [ "C", "_D", "D", "_E", "E", "F", "_G", "G", "_A", "A", "_B"]
     let key = shuffleArray(all_keys)[0]
@@ -132,15 +132,15 @@ function generateMelodicStructures(title, chordProgression) {
       key = key.replace("_", "") + "b"
     }
     // const key = "Db"  // debug
-    const header = `T: ${title}
-M: 4/4
-Q:1/4=120
-C:Jerry Bergonzi
-K: ${key}
+    const header = `T: ${data.title}
+M:4/4
+Q:${data.tempo}
+C:${data.composer}
+K:${key}
 `
     let chordData = []
     let _beforeChord = ''
-    for (let chord of chordProgression) {
+    for (let chord of data.progression) {
       if (chord === '') {
         chordData.push([])
         continue
@@ -220,20 +220,21 @@ K: ${key}
     return abcStr
   }
 
-  return getABCString(title, chordProgression)
+  return getABCString(data)
 }
 
 function setMelodicStructure(chordProgressions) {
   const initSong = document.getElementById("songs").value
   const abcEl = document.getElementById("abc");
-  const p = chordProgressions[initSong]
-  abcEl.value = generateMelodicStructures(p.title, p.progression)
+  abcEl.value = generateMelodicStructures(chordProgressions[initSong])
 }
 
 function main() {
   const chordProgressions = {
     lady_duck:{
       title: "Lady Duck",
+      tempo: "1/4=120",
+      composer: "Jerry Bergonzi",
       progression: [
         'I∆7', ':', 'I∆7', ':', 'IVm7', ':', '_VII7', ':',
         'I∆7', ':', 'I∆7', ':', '_VIIm7', ':', '_III7', ':',
@@ -243,6 +244,8 @@ function main() {
     },
     example4:{
       title: "example4",
+      tempo: "1/4=120",
+      composer: "Jerry Bergonzi",
       progression: [
         'I∆7', ':', 'VIIm7b5', 'III7b9', 'VIm7', 'II7', 'Vm7', 'I7',
         'IV7', ':', 'IIIm7b5', 'VI7b9', 'II7', ':', 'IIm7', 'V7',
@@ -265,10 +268,7 @@ function main() {
 
   const abcEl = document.getElementById("abc");
   document.getElementById('songs').addEventListener('click', function(e){
-    abcEl.value = generateMelodicStructures(
-      chordProgressions[e.target.value].title,
-      chordProgressions[e.target.value].progression,
-    )
+    abcEl.value = generateMelodicStructures(chordProgressions[e.target.value])
     abcEl.onchange()
   }, false);
 
