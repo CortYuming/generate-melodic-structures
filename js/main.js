@@ -189,17 +189,54 @@ K: ${key}
   return getABCString(title, chordProgression)
 }
 
+function setMelodicStructure(chordProgressions) {
+  const initSong = document.getElementById("songs").value
+  const abcEl = document.getElementById("abc");
+  const p = chordProgressions[initSong]
+  abcEl.value = generateMelodicStructures(p.title, p.progression)
+}
+
 function main() {
-  const title = "Lady Duck"
-  const chordProgression = [
-    'I∆7', ':', 'I∆7', ':', 'IVm7', ':', 'VIIb7', ':',
-    'I∆7', ':', 'I∆7', ':', 'VIIbm7', ':', 'IIIb7', ':',
-    'VIb∆7', ':', 'VIb∆7', ':', 'VIm7', ':', 'II7', ':',
-    'IIm7', ':', 'V7', ':', 'I∆7', 'IIIb∆7', 'VIb∆7', 'IIb∆7',
-  ]
+  const chordProgressions = {
+    lady_duck:{
+      title: "Lady Duck",
+      progression: [
+        'I∆7', ':', 'I∆7', ':', 'IVm7', ':', 'VIIb7', ':',
+        'I∆7', ':', 'I∆7', ':', 'VIIbm7', ':', 'IIIb7', ':',
+        'VIb∆7', ':', 'VIb∆7', ':', 'VIm7', ':', 'II7', ':',
+        'IIm7', ':', 'V7', ':', 'I∆7', 'IIIb∆7', 'VIb∆7', 'IIb∆7',
+      ]
+    },
+    example4:{
+      title: "example4",
+      progression: [
+        'I∆7', ':', 'VIIm7b5', 'III7b9', 'VIm7', 'II7', 'Vm7', 'I7',
+        'IV7', ':', 'IIIm7b5', 'VI7b9', 'II7', ':', 'IIm7', 'V7',
+      ]
+    },
+  }
+
+  let cpArr = []
+  for (const k of Object.keys(chordProgressions)) {
+    cpArr.push(`<option value="${k}">${chordProgressions[k].title}</option>`)
+  }
+  document.getElementById('songs').innerHTML = cpArr.join('\n')
+
+  setMelodicStructure(chordProgressions)
+
+  document.getElementById('generate').addEventListener('click', function(){
+    setMelodicStructure(chordProgressions)
+    abcEl.onchange()
+  }, false);
 
   const abcEl = document.getElementById("abc");
-  abcEl.value = generateMelodicStructures(title, chordProgression)
+  document.getElementById('songs').addEventListener('click', function(e){
+    abcEl.value = generateMelodicStructures(
+      chordProgressions[e.target.value].title,
+      chordProgressions[e.target.value].progression,
+    )
+    abcEl.onchange()
+  }, false);
 
   initEditor()
 }

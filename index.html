@@ -27,19 +27,11 @@
   </head>
   <body>
     <h1>Generate Melodic Structures</h1>
-    
-    <p><button onclick="location.reload();">Generate!(reload)</button></p>
-    <textarea name="abc" id="abc" cols="80" rows="15">X: 1
-T: Cooley's
-M: 4/4
-L: 1/8
-R: reel
-K: Emin
-|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|
-EBBA B2 EB|B2 AB defg|afe^c dBAF|DEFD E2:|
-|:gf|eB B2 efge|eB B2 gedB|A2 FA DAFA|A2 FA defg|
-eB B2 eBgB|eB B2 defg|afe^c dBAF|DEFD E2:|
-    </textarea>
+    <p>
+      <button id="generate">Generate!</button>
+      <select id="songs"></select>
+    </p>
+    <textarea name="abc" id="abc" cols="80" rows="15"></textarea>
 
     <div id="audio"><div class="abcjs-inline-audio">
       <button type="button" class="abcjs-midi-loop abcjs-btn" title="Click to toggle play once/repeat." aria-label="Click to toggle play once/repeat.">
