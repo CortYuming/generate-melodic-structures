@@ -34,17 +34,7 @@ function initEditor() {
     });
 }
 
-function generateMelodicStructures() {
-
-  const CHORD_PROGRESSIONS = {
-    Lady_Duck: [
-      'I∆7', ':', 'I∆7', ':', 'IVm7', ':', 'VIIb7', ':',
-      'I∆7', ':', 'I∆7', ':', 'VIIbm7', ':', 'IIIb7', ':',
-      'VIb∆7', ':', 'VIb∆7', ':', 'VIm7', ':', 'II7', ':',
-      'IIm7', ':', 'V7', ':', 'I∆7', 'IIIb∆7', 'VIb∆7', 'IIb∆7',
-    ]
-  }
-
+function generateMelodicStructures(title, chordProgression) {
   function getAllNotes(key) {
     const sharpNoteKeys = ["G", "D", "A", "E", "B", "^F"]
     const all_notes = [ "C", "_D", "D", "_E", "E", "F", "_G", "G", "_A", "A", "_B", "B", "c", "_d", "d", "_e", "e", "f", "_g", "g", "_a", "a", "_b", "b", "c'", "_d'", "d'", "_e'", "e'", "f'", "_g'", "g'", "_a'", "a'", "_b'", "b'"]
@@ -105,13 +95,11 @@ function generateMelodicStructures() {
     return getChromatic(key)[numberArr.indexOf(number)]
   }
 
-  function getABCString() {
+  function getABCString(title, chordProgression) {
     // Accidental is flat only
     const all_keys = [ "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb"]
     const key = shuffleArray(all_keys)[0]
     // const key = "Db"  // debug
-    const title = 'Lady_Duck'
-    const chordProgression = CHORD_PROGRESSIONS[title]
     const header = `T: ${title.replace("_", " ")}
 M: 4/4
 Q:1/4=120
@@ -198,12 +186,20 @@ K: ${key}
     return abcStr
   }
 
-  return getABCString()
+  return getABCString(title, chordProgression)
 }
 
 function main() {
+  const title = "Lady Duck"
+  const chordProgression = [
+    'I∆7', ':', 'I∆7', ':', 'IVm7', ':', 'VIIb7', ':',
+    'I∆7', ':', 'I∆7', ':', 'VIIbm7', ':', 'IIIb7', ':',
+    'VIb∆7', ':', 'VIb∆7', ':', 'VIm7', ':', 'II7', ':',
+    'IIm7', ':', 'V7', ':', 'I∆7', 'IIIb∆7', 'VIb∆7', 'IIb∆7',
+  ]
+
   const abcEl = document.getElementById("abc");
-  abcEl.value = generateMelodicStructures()
+  abcEl.value = generateMelodicStructures(title, chordProgression)
 
   initEditor()
 }
