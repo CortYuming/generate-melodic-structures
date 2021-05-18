@@ -240,6 +240,21 @@ function main() {
         'IIm7', ':', 'V7', ':', 'I∆7', '_III∆7', '_VI∆7', 'IIb∆7',
       ]
     },
+    on_the_brink:{
+      title: "On the Brink",
+      tempo: "1/4=120",
+      composer: "Jerry Bergonzi",
+      progression: [
+        'I∆7', ':', 'VIIm7b5', 'III7b9', 'VIm7', 'II7', 'Vm7', 'I7',
+        'IV7', ':', 'IIIm7b5', 'VI7b9', 'II7', ':', 'IIm7', 'V7',
+        'I∆7', ':', 'VIIm7b5', 'III7b9', 'VIm7', 'II7', 'Vm7', 'I7',
+        'IV7', ':', 'IIIm7b5', 'VI7b9', 'II7', 'V7', 'I∆7', ':',
+        'Vm7', ':', 'I7', ':', 'IV∆7', ':', 'IV∆7', ':',
+        '_VIIm7', ':', '_III7', ':', '_VI∆7', ':', 'IIm7', 'V7',
+        'I∆7', ':', 'VIIm7b5', 'III7b9', 'VIm7', 'II7', 'Vm7', 'I7',
+        'IV7', ':', 'IIIm7b5', 'VI7b9', 'II7', 'V7', 'I∆7', ':',
+      ]
+    },
     example4:{
       title: "example4",
       tempo: "1/4=120",
