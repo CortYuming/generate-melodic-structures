@@ -276,6 +276,8 @@ function main() {
 
   document.getElementById('generate').addEventListener('click', function(){
     setMelodicStructure(chordProgressions)
+    const abcEl = document.getElementById("abc");
+    abcEl.onchange()
   }, false);
 
 
