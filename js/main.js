@@ -261,14 +261,15 @@ function main() {
 
   document.getElementById('generate').addEventListener('click', function(){
     setMelodicStructure(chordProgressions)
-    abcEl.onchange()
   }, false);
 
+
   const abcEl = document.getElementById("abc");
-  document.getElementById('songs').addEventListener('click', function(e){
+  const songsEl = document.getElementById('songs')
+  songsEl.addEventListener('change', (e) => {
     abcEl.value = generateMelodicStructures(chordProgressions[e.target.value])
     abcEl.onchange()
-  }, false);
+  });
 
   initEditor()
 }
