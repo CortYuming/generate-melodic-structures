@@ -163,6 +163,8 @@ K:${key}
 
       // add display chord
       if (beatCount % 2 === 1 || (beatCount % 2 === 0 && _beforeChord !== chord)) {
+        console.assert(note !== undefined, `note is undefined:${_key},${baseNumber}`)
+
         let _note = note.toUpperCase()
         _note = _note.replace("'", "")
         if (_note.indexOf("_") !== -1) {
