@@ -14,23 +14,19 @@ function initEditor() {
   new ABCJS.Editor(
     "abc", {
       paper_id: "paper0",
-      synth: {
-        el: "#audio",
-        options: {
-          displayLoop: true,
-          displayRestart: true,
-          displayPlay: true,
-          displayProgress: true,
-          displayWarp: true,
-        }
-      },
+      generate_midi: true,
+      midi_id:"midi",
+      midi_download_id: "midi-download",
       generate_warnings: true,
       warnings_id:"warnings",
       abcjsParams: {
         generateDownload: true,
         clickListener: selectionCallback,
         responsive: "resize",
-      }
+      },
+      midi_options: {
+        generateDownload: true
+      },
     });
 }
 

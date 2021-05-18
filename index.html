@@ -7,9 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Melodic Structures</title>
 
-    <link href="css/abcjs-audio.css" media="all" rel="stylesheet" type="text/css">
-    <script src="js/abcjs-basic-min.js" type="text/javascript"></script>
+    <link href="css/abcjs-midi.css" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="js/abcjs_midi_5.8.0-min.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    window.ABCJS.midi.soundfontUrl = "https://paulrosen.github.io/midi-js-soundfonts/abcjs/";
+    </script>
     <style>
     textarea#abc,
     .abcjs-inline-audio {
@@ -23,6 +27,15 @@
     p {
       max-width: 600px;
     }
+    #warnings {
+      color: #ccc;
+    }
+    #midi-download>div>a:link,
+    #midi-download>div>a:visited,
+    #midi-download>div>a:hover,
+    #midi-download>div>a:active {
+      color: #bbb;
+    }
     </style>
   </head>
   <body>
@@ -33,41 +46,10 @@
     </p>
     <textarea name="abc" id="abc" cols="80" rows="15"></textarea>
 
-    <div id="audio"><div class="abcjs-inline-audio">
-      <button type="button" class="abcjs-midi-loop abcjs-btn" title="Click to toggle play once/repeat." aria-label="Click to toggle play once/repeat.">
-      </button>
-      <button type="button" class="abcjs-midi-reset abcjs-btn" title="Click to go to beginning." aria-label="Click to go to beginning.">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
-          <g>
-            <polygon points="5 12.5 24 0 24 25"></polygon>
-            <rect width="3" height="25" x="0" y="0"></rect>
-          </g>
-        </svg>
-      </button>
-      <button type="button" class="abcjs-midi-start abcjs-btn" title="Click to play/pause." aria-label="Click to play/pause.">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="abcjs-play-svg">
-          <g>
-            <polygon points="4 0 23 12.5 4 25"></polygon>
-          </g>
-        </svg>
+    <div id="midi"></div>
+    <div id="midi-download"></div>
+    <div id="warnings"">No errors</div>
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" class="abcjs-pause-svg">
-          <g>
-            <rect width="8.23" height="25"></rect>
-            <rect width="8.23" height="25" x="17"></rect>
-          </g>
-        </svg>
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="abcjs-loading-svg">
-          <circle cx="50" cy="50" fill="none" stroke-width="20" r="35" stroke-dasharray="160 55"></circle>
-        </svg>
-      </button>
-      <button type="button" class="abcjs-midi-progress-background" title="Click to change the playback position." aria-label="Click to change the playback position."><span class="abcjs-midi-progress-indicator" style="left: 12.8672px;"></span></button>
-      <span class="abcjs-midi-clock">0:00</span>
-      <span class="abcjs-tempo-wrapper"><label><input class="abcjs-midi-tempo" type="number" min="1" max="300" value="100" title="Change the playback speed." aria-label="Change the playback speed.">%</label><span>&nbsp;(<span class="abcjs-midi-current-tempo">120</span> BPM)</span></span>
-      <div class="abcjs-css-warning" style="font-size: 12px;color:red;border: 1px solid red;text-align: center;width: 300px;margin-top: 4px;font-weight: bold;border-radius: 4px;">CSS required: load abcjs-audio.css</div></div>
-    </div>
-    <div id="warnings" style="color: #ccc;">No errors</div>
     <div id="paper0" class="paper" style="overflow: hidden; height: 493.087px;"></div>
     <div id="selection"></div>
   </body>
