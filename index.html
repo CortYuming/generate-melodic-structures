@@ -9,6 +9,7 @@
 
     <link href="css/abcjs-midi.css" media="all" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <script src="js/abcjs_midi_5.8.0-min.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -16,7 +17,7 @@
     </script>
     <style>
     #main-title {
-      color:#ccc;
+      /* color:#ccc; */
       cursor: pointer
     }
     textarea#abc,
@@ -34,27 +35,29 @@
     #warnings {
       color: #ccc;
     }
-    #midi-download>div>a:link,
-    #midi-download>div>a:visited,
-    #midi-download>div>a:hover,
-    #midi-download>div>a:active {
-      color: #bbb;
-    }
     </style>
   </head>
   <body>
-    <h1 id="main-title">Generate Melodic Structures</h1>
-    <div id="editor">
-      <p>
-        <select id="songs"></select>
-        <button id="generate">Generate!</button>
-      </p>
-      <textarea name="abc" id="abc" cols="80" rows="15"></textarea>
+    <section class="section">
+      <div class="container">
+        <h1 id="main-title" class="title is-4 has-text-grey-light">Generate Melodic Structures</h1>
+        <div id="editor">
+          <div class="pb-1">
+            <p>
+              <div class="select is-small">
+                <select id="songs"></select>
+              </div>
+              <button id="generate" class="button is-small">Generate!</button>
+            </p>
+          </div>
+          <textarea name="abc" id="abc" cols="80" rows="15" class="textarea"></textarea>
 
-      <div id="midi"></div>
-      <div id="midi-download"></div>
-      <div id="warnings"">No errors</div>
-    </div>
-    <div id="paper0" class="paper" style="overflow: hidden; height: 493.087px;"></div>
+          <div id="midi"></div>
+          <div id="midi-download"></div>
+          <div id="warnings"">No errors</div>
+        </div>
+        <div id="paper0" class="paper" style="overflow: hidden; height: 493.087px;"></div>
+      </div>
+    </section>
   </body>
 </html>
