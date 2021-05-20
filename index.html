@@ -15,6 +15,10 @@
     window.ABCJS.midi.soundfontUrl = "https://paulrosen.github.io/midi-js-soundfonts/abcjs/";
     </script>
     <style>
+    #main-title {
+      color:#ccc;
+      cursor: pointer
+    }
     textarea#abc,
     .abcjs-inline-audio {
       width: 100%;
@@ -39,18 +43,18 @@
     </style>
   </head>
   <body>
-    <h1>Generate Melodic Structures</h1>
-    <p>
-      <button id="generate">Generate!</button>
-      <select id="songs"></select>
-    </p>
-    <textarea name="abc" id="abc" cols="80" rows="15"></textarea>
+    <h1 id="main-title">Generate Melodic Structures</h1>
+    <div id="editor">
+      <p>
+        <button id="generate">Generate!</button>
+        <select id="songs"></select>
+      </p>
+      <textarea name="abc" id="abc" cols="80" rows="15"></textarea>
 
-    <div id="midi"></div>
-    <div id="midi-download"></div>
-    <div id="warnings"">No errors</div>
-
+      <div id="midi"></div>
+      <div id="midi-download"></div>
+      <div id="warnings"">No errors</div>
+    </div>
     <div id="paper0" class="paper" style="overflow: hidden; height: 493.087px;"></div>
-    <div id="selection"></div>
   </body>
 </html>

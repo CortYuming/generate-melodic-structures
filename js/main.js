@@ -227,6 +227,15 @@ function setMelodicStructure(chordProgressions) {
   abcEl.value = generateMelodicStructures(chordProgressions[initSong])
 }
 
+function tggoleDisplayEditor() {
+  const editor = document.getElementById('editor')
+  if (editor.style.display === 'none') {
+    editor.style.display = "block";
+  } else {
+    editor.style.display = "none";
+  }
+}
+
 function main() {
   const chordProgressions = {
     lady_duck:{
@@ -281,12 +290,18 @@ function main() {
   }, false);
 
 
-  const abcEl = document.getElementById("abc");
+  const abcEl = document.getElementById("abc")
   const songsEl = document.getElementById('songs')
   songsEl.addEventListener('change', (e) => {
     abcEl.value = generateMelodicStructures(chordProgressions[e.target.value])
     abcEl.onchange()
   });
+
+  const toggleEditor = document.getElementById("main-title")
+  toggleEditor.addEventListener('click', () => {
+    console.info('Click!!!1')
+    tggoleDisplayEditor()
+  })
 
   initEditor()
 }
