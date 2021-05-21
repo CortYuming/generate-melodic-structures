@@ -37,7 +37,7 @@ function generateMelodicStructures(data) {
     const all_notes_for_sharp = [ "C", "^C", "D", "^D", "E", "F", "^F", "G", "^G", "A", "^A", "B", "c", "^c", "d", "^d", "e", "f", "^f", "g", "^g", "a", "^a", "b", "c'", "^c'", "d'", "^d'", "e'", "f'", "^f'", "g'", "^g'", "a'", "^a'", "b'"]
 
     let notes = all_notes
-    if (sharpNoteKeys.includes(key) || key.indexOf("^") !== -1) {
+    if (sharpNoteKeys.includes(key.toUpperCase()) || key.indexOf("^") !== -1) {
       notes = all_notes_for_sharp
     }
 
@@ -100,29 +100,37 @@ function generateMelodicStructures(data) {
     return altnoteArr
   }
 
-  function convShapeInterval(shape, note) {
+  function convShapeInterval(shape, note_interval) {
     const intervals = {
-      b9: [3, 2],
-      b5: [8, 7],
+      b9: [
+        [3, 2],
+        [15, 14],
+      ],
+      b5: [
+        [8, 7],
+      ],
     }
 
-    const interval = intervals[note]
 
-    if (!interval) {
+    if (!Object.keys(intervals).length) {
       return shape
     }
+
     const _shape = shape.slice()
+    const intervalData = intervals[note_interval]
 
     for (let i = 0; i < _shape.length; i++) {
-      if (_shape[i] === interval[0]) {
-        _shape[i] = interval[1]
+      for (const _interval of intervalData) {
+        if (_shape[i] === _interval[0]) {
+          _shape[i] = _interval[1]
+        }
       }
     }
     return _shape
   }
   function getABCString(data) {
     // Accidental is flat only
-    const all_keys = [ "C", "_D", "D", "_E", "E", "F", "_G", "G", "_A", "A", "_B"]
+    const all_keys = [ "C", "_D", "D", "_E", "E", "F", "_G", "G", "_A", "A", "_B", "B"]
     let key = shuffleArray(all_keys)[0]
     if (key.startsWith("_")) {
       key = key.replace("_", "") + "b"
@@ -176,10 +184,18 @@ K:${key}
         barArr.push(`"${chord.replace(baseNumber, _note)}"`)
       }
 
-      // add shape
-      let shape = [1, 3, 5, 8]  // 1, 2, 3, 5
+      // add shape3
+      let shape = shuffleArray([
+        [1, 3, 5, 8],  // 1, 2, 3, 5
+        [3, 5, 8, 13],  // 2, 3, 5, 8
+        [5, 8, 13, 15],  // 3, 5, 8, 9
+        [8, 13, 15, 17],  // 5, 8, 9, 10
+        ])[0]
       if (isMinor) {
         shape = [1, 4, 6, 8]  // 1, b3, 4, 5
+        shape = [4, 6, 8, 13]  // b3, 4, 5, 8
+        shape = [6, 8, 13, 16]  // 4, 5, 8, b10
+        shape = [8, 13, 16, 18]  // 5, 8, b10, 11
       }
 
       for (const n of checkAltNote(chord)) {
