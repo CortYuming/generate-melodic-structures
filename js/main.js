@@ -253,6 +253,8 @@ function tggoleDisplayEditor() {
 }
 
 function main() {
+  window.ABCJS.midi.soundfontUrl = "https://paulrosen.github.io/midi-js-soundfonts/abcjs/";
+
   const chordProgressions = {
     lady_duck:{
       title: "Lady Duck",
