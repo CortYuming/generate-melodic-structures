@@ -5,7 +5,6 @@ function selectionCallback(abcelem) {
     if (abcelem.hasOwnProperty(key) && key !== "abselem")
       note[key] = abcelem[key];
   }
-  console.log(abcelem);
   const el = document.getElementById("selection");
   el.innerHTML = "<b>selectionCallback parameter:</b><br>" + JSON.stringify(note);
 }
@@ -317,7 +316,6 @@ function main() {
 
   const toggleEditor = document.getElementById("main-title")
   toggleEditor.addEventListener('click', () => {
-    console.info('Click!!!1')
     tggoleDisplayEditor()
   })
 
